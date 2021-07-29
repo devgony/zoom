@@ -63,7 +63,7 @@ touch src/public/js/app.js src/views/home.pug
 }
 ```
 
-## MVP.CSS
+## MVP.CSS - minimal css
 
 - add `https://unpkg.com/mvp.css`
 
@@ -101,3 +101,53 @@ html(lang="en")
 3. close connection
 
 - Can work between two backend server as well.
+
+# #1.2 WebSockets in NodeJS (11:34)
+
+## ws core: study ws before using framework
+
+- run http and ws server togather (http server is not mendatory if only need ws)
+
+```
+npm i ws
+
+// server.js
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+server.listen(3000, handleListen);
+```
+
+# #1.3 WebSocket Events (11:40)
+
+## open connection at server.js
+
+```js
+function handleConnection(socket) {
+  console.log(socket);
+}
+wss.on("connection", handleConnection);
+```
+
+## request from frontend
+
+- get my ip and port: `window.location.host`
+
+```js
+const socket = new WebSocket(`ws://${window.location.host}`);
+```
+
+# #1.4 WebSocket Messages (12:37)
+
+## front
+
+- open
+- send message1
+- send each 10s messsage2
+- close
+
+## back
+
+- connection
+  - close
+  - get message
+  - send message
